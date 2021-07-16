@@ -95,7 +95,6 @@ function DocumentSign({ file }) {
             <StandardField key={field.displayName} {...field} />
           ))}
         </div>
-        
           <DocumentDesign
             anchors={anchors}
             onChangeAnchors={setAnchors}

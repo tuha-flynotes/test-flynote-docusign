@@ -31,7 +31,7 @@ export const standardFields = [
     icon: Patient,
     type: 'text',
     displayName: 'Patient Name',
-    labelName: '<<Practice_Name>>'
+    labelName: '<<Patient_Name>>'
   },
   {
     name: 'patientAddressLine1',

@@ -12,7 +12,7 @@ const FieldText = ({ value, x, y }) => (
   <div style={{ position: 'absolute', top: y, left: x, fontSize: 12, fontWeight: 600 }}>{value}</div>
 )
 
-export default function Preview({ anchors, open, setOpen, editing = false }) {
+export default function Preview({ anchors, open, setOpen, editing = false, file }) {
   const presetValues = {
     patientName: 'Chloe L Franklin',
     patientAddressLine1: '58',
@@ -65,7 +65,7 @@ export default function Preview({ anchors, open, setOpen, editing = false }) {
               <DocumentEditor
                 anchors={data}
                 onChangeAnchors={setData}
-                fileUrl="/potrait_consent.pdf"
+                fileUrl={file}
                 classes={{
                   documentContainer: "documentContainer",
                   pagesWrapper: "pagesWrapper",
@@ -79,7 +79,7 @@ export default function Preview({ anchors, open, setOpen, editing = false }) {
             ) : (
               <DocumentView 
                 anchors={data}
-                fileUrl="/potrait_consent.pdf"
+                fileUrl={file}
                 classes={{
                   documentContainer: "documentContainer",
                   pagesWrapper: "pagesWrapper",
