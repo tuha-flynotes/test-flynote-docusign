@@ -66,7 +66,7 @@ const FieldLabel = (props) => {
 
   const style = {
     ...commonStyle,
-    padding: '0.5rem',
+    paddingLeft: 4,
     display: 'flex',
     alignItems: 'center'
   };

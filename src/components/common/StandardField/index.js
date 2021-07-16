@@ -4,12 +4,13 @@ import { useAnchor } from "@flynotes/fly-document"
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import { useStyles } from "./styles";
 
-const StandardField = ({ icon, type, labelName, displayName }) => {
+const StandardField = ({ icon, type, labelName, displayName, name }) => {
   const [{ isDragging }, drag, preview] = useAnchor({
     icon,
     type,
     labelName,
-    displayName
+    displayName,
+    name
   });
   const classes = useStyles({ isDragging });
   React.useEffect(() => {

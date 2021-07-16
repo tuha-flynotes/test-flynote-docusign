@@ -7,6 +7,7 @@ import { Typography, Breadcrumbs, Link, Button, Box } from "@material-ui/core";
 import { useStyles } from './styles';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Cancel from '@material-ui/icons/Close';
+import PenIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import SaveIcon from '@material-ui/icons/Save';
 import Preview from "../../components/Preview";
@@ -14,6 +15,7 @@ import FieldLabel from "../../components/common/FieldLabel";
 
 function DocumentSign() {
   const classes = useStyles();
+  const [edit, setEdit] = useState(false);
   const [anchors, setAnchors] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -60,7 +62,15 @@ function DocumentSign() {
         <Box>
           <Button
             variant="outlined"
-            onClick={() => setOpen(true)}
+            onClick={() => { setEdit(true); setOpen(true)}}
+            className={classes.button}
+            startIcon={<PenIcon />}
+          >
+            Input
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() =>{ setEdit(false); setOpen(true)}}
             className={classes.button}
             startIcon={<VisibilityIcon />}
           >
@@ -76,7 +86,7 @@ function DocumentSign() {
           </Button>
         </Box>
       </div>
-      <Preview anchors={anchors} open={open} setOpen={setOpen} />
+      {open && <Preview anchors={anchors} open setOpen={setOpen} editing={edit} />}
     </div >
   );
 }
