@@ -50,12 +50,16 @@ function DocumentSign({ file }) {
   }, [file.id]);
 
   if (loading) {
-    return <CircularProgress />
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
   }
 
 
   const onSave = () => {
-    async function setData() { 
+    async function setData() {
       const { id, ...fileWithoutId } = file;
       const response = await fetch(`http://localhost:5000/file-document/${id}`, {
         method: 'PUT',
@@ -77,69 +81,71 @@ function DocumentSign({ file }) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-    <div>
-      <div className={classes.breadcrumbs}>
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-          <Typography color="textPrimary">FlySend</Typography>
-          <Link className={classes.link} color="textPrimary">Send Comms</Link>
-          <Link className={classes.link} color="textPrimary">Editing document</Link>
-        </Breadcrumbs>
-      </div>
-      <div className={classes.container}>
-        <div className={classes.standardContainer}>
-          <Typography>Document:</Typography>
-          <Typography className={classes.fileName}>
-            {file.attachment.name}
-          </Typography>
-          {standardFields.map((field) => (
-            <StandardField key={field.displayName} {...field} />
-          ))}
+      <div>
+        <div className={classes.breadcrumbs}>
+          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            <Typography color="textPrimary">FlySend</Typography>
+            <Link className={classes.link} color="textPrimary">Send Comms</Link>
+            <Link className={classes.link} color="textPrimary">Editing document</Link>
+          </Breadcrumbs>
         </div>
-          <DocumentDesign
-            anchors={anchors}
-            onChangeAnchors={setAnchors}
-            fileUrl={fileUrl}
-            classes={{
-              documentContainer: "documentContainer",
-              pagesWrapper: "pagesWrapper",
-              pageWrapper: "pageWrapper",
-              previewContainer: "previewContainer",
-              previewPageWrapper: "previewPageWrapper",
-              previewFooter: "previewFooter",
-            }}
-            FieldLabel={FieldLabel}
-          />
-      </div>
-      <div className={classes.bottomAction}>
-        <Button
-          variant="outlined"
-          className={classes.button}
-          startIcon={<Cancel />}
-        >
-          Delete
-        </Button>
-        <Box>
+        <div className={classes.container}>
+          <div className={classes.standardContainer}>
+            <Typography>Document:</Typography>
+            <Typography className={classes.fileName}>
+              {file.attachment.name}
+            </Typography>
+            {standardFields.map((field) => (
+              <StandardField key={field.displayName} {...field} />
+            ))}
+          </div>
+          <Box width="calc(831px + 162px + 70px + 70px)">
+            <DocumentDesign
+              anchors={anchors}
+              onChangeAnchors={setAnchors}
+              fileUrl={fileUrl}
+              classes={{
+                documentContainer: "documentContainer",
+                pagesWrapper: "pagesWrapper",
+                pageWrapper: "pageWrapper",
+                previewContainer: "previewContainer",
+                previewPageWrapper: "previewPageWrapper",
+                previewFooter: "previewFooter",
+              }}
+              FieldLabel={FieldLabel}
+            />
+          </Box>
+        </div>
+        <div className={classes.bottomAction}>
           <Button
             variant="outlined"
-            onClick={() =>{ setOpen(true)}}
             className={classes.button}
-            startIcon={<VisibilityIcon />}
+            startIcon={<Cancel />}
           >
-            Preview
+            Delete
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            startIcon={<SaveIcon />}
-            onClick={onSave}
-          >
-            Save
-          </Button>
-        </Box>
-      </div>
-      {open && <Preview anchors={anchors} open setOpen={setOpen} />}
-    </div >
+          <Box>
+            <Button
+              variant="outlined"
+              onClick={() => { setOpen(true) }}
+              className={classes.button}
+              startIcon={<VisibilityIcon />}
+            >
+              Preview
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              startIcon={<SaveIcon />}
+              onClick={onSave}
+            >
+              Save
+            </Button>
+          </Box>
+        </div>
+        {open && <Preview anchors={anchors} open setOpen={setOpen} file={file} fileUrl={fileUrl} onSave={onSave}/>}
+      </div >
     </DndProvider>
   );
 }

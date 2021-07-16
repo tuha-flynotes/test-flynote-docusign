@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { CircularProgress, List, ListItem, ListItemText } from '@material-ui/core';
-
+import { Box, CircularProgress, List, ListItem, ListItemText } from '@material-ui/core';
+import { useStyles } from './styles';
 export default function SelectDocument({ onSelect }) {
+  const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
   useEffect(() => {
@@ -19,14 +20,16 @@ export default function SelectDocument({ onSelect }) {
 
   if (loading) return <CircularProgress />
   return (
-    <List>
-      {
-        files.map((file, index) => (
-          <ListItem key={file.id} onClick={() => onSelect(files[index])}>
-            <ListItemText>{file.attachment.name}</ListItemText>
-          </ListItem>
-        ))
-      }
-    </List>
+    <Box className={classes.container}>
+      <List>
+        {
+          files.map((file, index) => (
+            <ListItem button key={file.id} onClick={() => onSelect(files[index])}>
+              <ListItemText>{file.attachment.name}</ListItemText>
+            </ListItem>
+          ))
+        }
+      </List>
+    </Box>
   )
 }

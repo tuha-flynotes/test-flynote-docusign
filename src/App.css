@@ -9,6 +9,7 @@
   overflow-y: scroll;
   background-color: #efefef;
   overflow-x: hidden !important;
+  width: 831px;
 }
 
 .pagesWrapper > :first-child {
@@ -25,7 +26,7 @@
 
 .previewContainer {
   background-color: #efefef;
-  width: 162px;
+  width: 180px;
   overflow-y: scroll;
 }
 
@@ -38,4 +39,12 @@
 .previewFooter {
   width: 100%;
   padding: 4px;
+}
+
+.react-pdf__Page__textContent {
+  display: none;
+}
+
+.react-pdf__Page__annotations {
+  display: none;
 }
