@@ -4,10 +4,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { DocumentDesign } from "@flynotes/fly-document";
+import { DocumentEditor } from "@flynotes/fly-document";
+import FieldInput from '../common/FieldInput';
+import { useStyles } from './styles';
 
 export default function Preview({ anchors, open, setOpen }) {
-
+  const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
@@ -34,8 +36,8 @@ export default function Preview({ anchors, open, setOpen }) {
         maxWidth="lg"
       >
         <DialogTitle id="scroll-dialog-title">Preview</DialogTitle>
-        <DialogContent dividers>
-          <DocumentDesign
+        <DialogContent dividers className={classes.DialogContent}>
+          <DocumentEditor
             anchors={anchors}
             onChangeAnchors={() => { }}
             fileUrl="/potrait_consent.pdf"
@@ -47,6 +49,7 @@ export default function Preview({ anchors, open, setOpen }) {
               previewPageWrapper: "previewPageWrapper",
               previewFooter: "previewFooter",
             }}
+            FieldInput={FieldInput}
           />
         </DialogContent>
         <DialogActions>

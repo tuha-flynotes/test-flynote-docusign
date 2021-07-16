@@ -10,11 +10,13 @@ import Cancel from '@material-ui/icons/Close';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import SaveIcon from '@material-ui/icons/Save';
 import Preview from "../../components/Preview";
+import FieldLabel from "../../components/common/FieldLabel";
 
 function DocumentSign() {
   const classes = useStyles();
   const [anchors, setAnchors] = useState([]);
   const [open, setOpen] = useState(false);
+
   return (
     <div>
       <div className={classes.breadcrumbs}>
@@ -44,6 +46,7 @@ function DocumentSign() {
             previewPageWrapper: "previewPageWrapper",
             previewFooter: "previewFooter",
           }}
+          FieldLabel={FieldLabel}
         />
       </div>
       <div className={classes.bottomAction}>

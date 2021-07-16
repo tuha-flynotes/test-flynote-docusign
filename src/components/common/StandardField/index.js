@@ -1,22 +1,16 @@
-import Typography from "@material-ui/core/Typography";
 import React from "react";
-import { useDrag } from "react-dnd";
+import Typography from "@material-ui/core/Typography";
+import { useAnchor } from "@flynotes/fly-document"
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import { useStyles } from "./styles";
 
 const StandardField = ({ icon, type, labelName, displayName }) => {
-  const [{ isDragging }, drag, preview] = useDrag(() => ({
-    type: type,
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-    item: {
-      icon,
-      type,
-      labelName,
-      displayName
-    },
-  }));
+  const [{ isDragging }, drag, preview] = useAnchor({
+    icon,
+    type,
+    labelName,
+    displayName
+  });
   const classes = useStyles({ isDragging });
   React.useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true })
