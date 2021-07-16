@@ -13,7 +13,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import Preview from "../../components/Preview";
 import FieldLabel from "../../components/common/FieldLabel";
 
-function DocumentSign() {
+function DocumentSign({ file }) {
   const classes = useStyles();
   const [edit, setEdit] = useState(false);
   const [anchors, setAnchors] = useState([]);
@@ -31,7 +31,7 @@ function DocumentSign() {
       <div className={classes.container}>
         <div className={classes.standardContainer}>
           <Typography>Document:</Typography>
-          <Typography className={classes.fileName}>Charles Saunders - Bridge - 2021-03-12 (1).pdf</Typography>
+          <Typography className={classes.fileName}>{file?.name}</Typography>
           {standardFields.map((field) => (
             <StandardField key={field.displayName} {...field} />
           ))}
@@ -39,7 +39,7 @@ function DocumentSign() {
         <DocumentDesign
           anchors={anchors}
           onChangeAnchors={setAnchors}
-          fileUrl="/potrait_consent.pdf"
+          fileUrl={file}
           classes={{
             documentContainer: "documentContainer",
             pagesWrapper: "pagesWrapper",
@@ -62,7 +62,7 @@ function DocumentSign() {
         <Box>
           <Button
             variant="outlined"
-            onClick={() => { setEdit(true); setOpen(true)}}
+            onClick={() => { setEdit(true); setOpen(true) }}
             className={classes.button}
             startIcon={<PenIcon />}
           >
@@ -70,7 +70,7 @@ function DocumentSign() {
           </Button>
           <Button
             variant="outlined"
-            onClick={() =>{ setEdit(false); setOpen(true)}}
+            onClick={() => { setEdit(false); setOpen(true) }}
             className={classes.button}
             startIcon={<VisibilityIcon />}
           >
@@ -86,7 +86,7 @@ function DocumentSign() {
           </Button>
         </Box>
       </div>
-      {open && <Preview anchors={anchors} open setOpen={setOpen} editing={edit} />}
+      {open && <Preview anchors={anchors} open setOpen={setOpen} editing={edit} file={file} />}
     </div >
   );
 }

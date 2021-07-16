@@ -15,7 +15,7 @@ const StandardField = ({ icon, type, labelName, displayName, name }) => {
   const classes = useStyles({ isDragging });
   React.useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true })
-  }, []);
+  }, [preview]);
   return (
     <div className={classes.box} ref={drag}>
       <img className={classes.img} src={icon} alt="field_icon" />
