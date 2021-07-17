@@ -95,11 +95,13 @@ function DocumentSign({ file }) {
             <Typography className={classes.fileName}>
               {file.attachment.name}
             </Typography>
-            {standardFields.map((field) => (
-              <StandardField key={field.displayName} {...field} />
-            ))}
+            <Box height="calc(100vh - 185px - 65px - 140px)" overflow="auto">
+              {standardFields.map((field) => (
+                <StandardField key={field.displayName} {...field} />
+              ))}
+            </Box>
           </div>
-          <Box width="calc(831px + 162px + 70px + 70px)">
+          <Box width="calc(820px + 162px + 70px + 70px)">
             <DocumentDesign
               anchors={anchors}
               onChangeAnchors={setAnchors}
@@ -144,7 +146,7 @@ function DocumentSign({ file }) {
             </Button>
           </Box>
         </div>
-        {open && <Preview anchors={anchors} open setOpen={setOpen} file={file} fileUrl={fileUrl} onSave={onSave}/>}
+        {open && <Preview anchors={anchors} open setOpen={setOpen} file={file} fileUrl={fileUrl} onSave={onSave} />}
       </div >
     </DndProvider>
   );
