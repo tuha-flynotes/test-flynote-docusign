@@ -1,13 +1,14 @@
 
-import { useState } from 'react';
-import Stepper from "@material-ui/core/Stepper";
+import Box from '@material-ui/core/Box';
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Box from '@material-ui/core/Box';
-import "./App.css";
+import Stepper from "@material-ui/core/Stepper";
+import { makeStyles } from "@material-ui/core/styles";
+import { useState } from 'react';
 import DocumentSign from "./pages/DocumentSign";
 import SelectDocument from './pages/SelectDocument';
-import { makeStyles } from "@material-ui/core/styles";
+
+import "./App.css";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +31,10 @@ function App() {
   ];
   const CONTENT_COMPONENTS = [SelectDocument, DocumentSign];
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState<any>(0);
   const [file, setFile] = useState({});
   const ContentComponent = CONTENT_COMPONENTS[activeStep];
-  const handleSelect = (selectedFile) => {
+  const handleSelect = (selectedFile: any) => {
     setFile(selectedFile);
     setActiveStep(1);
   }

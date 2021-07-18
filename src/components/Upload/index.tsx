@@ -10,18 +10,24 @@ import PendingItem from './PendingItem';
 import { useStyles } from "./styles";
 import { Typography } from '@material-ui/core';
 
-export default function Upload({ open = false, setOpen, onUploadFile }) {
+interface IProps {
+  open: boolean;
+  setOpen: (param: boolean) => void;
+  onUploadFile: (file: File) => void;
+}
+
+export default function Upload({ open = false, setOpen, onUploadFile }: IProps) {
   const classes = useStyles();
-  const [file, setFile] = React.useState();
+  const [file, setFile] = React.useState<File | undefined>();
   const handleClose = () => {
     setOpen?.(false);
   };
 
   const handleUpload = () => {
-    onUploadFile?.(file);
+    onUploadFile?.(file!);
   }
 
-  const descriptionElementRef = React.useRef(null);
+  const descriptionElementRef = React.useRef<HTMLElement>(null);
   React.useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
@@ -32,7 +38,11 @@ export default function Upload({ open = false, setOpen, onUploadFile }) {
   }, [open]);
 
   const handleDelete = () => {
-    setFile();
+    setFile(undefined);
+  }
+
+  const handleSelectFile = (file: {file: File[]} ) => {
+    setFile(file?.file?.[0]);
   }
 
   return (
@@ -49,7 +59,7 @@ export default function Upload({ open = false, setOpen, onUploadFile }) {
         <Typography className={classes.dialogTitle}>Select document to upload</Typography>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <UploadDropZone onSelectFile={setFile} />
+        <UploadDropZone onSelectFile={handleSelectFile} />
         {file && (
           <PendingItem file={file} onDelete={handleDelete} />
         )}

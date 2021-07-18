@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import axios from "axios";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -9,11 +9,11 @@ import { Typography, Breadcrumbs, Link, Button, Box, CircularProgress } from "@m
 import { useStyles } from './styles';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Cancel from '@material-ui/icons/Close';
-import PenIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import SaveIcon from '@material-ui/icons/Save';
 import Preview from "../../components/Preview";
 import FieldLabel from "../../components/common/FieldLabel";
+import { FieldLabelProps } from "../../../../flynotes-docusign/dist/lib/components/anchors";
 
 const JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJhMTc0NGMxLWRiOTItNGM0Zi1iMDRiLTkxMjk5NjViMDI0ZSIsImlhdCI6MTYyNTgxMjI1OCwiZXhwIjoxNjMzNTg4MjU4fQ.P2N72xiJUnLCMSOQ-va1ql4V72htuhgT2cQBxRx78jc';
 
@@ -24,7 +24,7 @@ const attachmentClient = axios.create({
   }
 })
 
-const getAttachmentLink = async (file) => {
+const getAttachmentLink = async (file: any) => {
   const response = await attachmentClient.get('/attachment-link', {
     params: {
       key: file.attachment.s3FileKey,
@@ -35,7 +35,7 @@ const getAttachmentLink = async (file) => {
 }
 
 
-function DocumentSign({ file }) {
+function DocumentSign({ file }: any) {
   const classes = useStyles();
   const [fileUrl, setFileUrl] = useState('');
   const [anchors, setAnchors] = useState(file.predefinedFields.fields || []);
@@ -114,7 +114,7 @@ function DocumentSign({ file }) {
                 previewPageWrapper: "previewPageWrapper",
                 previewFooter: "previewFooter",
               }}
-              FieldLabel={FieldLabel}
+              FieldLabel={FieldLabel as FC<FieldLabelProps>}
             />
           </Box>
         </div>
@@ -146,7 +146,7 @@ function DocumentSign({ file }) {
             </Button>
           </Box>
         </div>
-        {open && <Preview anchors={anchors} open setOpen={setOpen} file={file} fileUrl={fileUrl} onSave={onSave} />}
+        {open && <Preview anchors={anchors} open setOpen={setOpen} file={file} fileUrl={fileUrl} />}
       </div >
     </DndProvider>
   );

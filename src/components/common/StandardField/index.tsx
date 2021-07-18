@@ -3,8 +3,8 @@ import Typography from "@material-ui/core/Typography";
 import { useAnchor } from "@flynotes/fly-document"
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import { useStyles } from "./styles";
-
-const StandardField = ({ icon, type, labelName, displayName, name }) => {
+import { IField } from '../../../types/StandardField';
+const StandardField = ({ icon, type, labelName, displayName, name }: IField): JSX.Element => {
   const [{ isDragging }, drag, preview] = useAnchor({
     icon,
     type,

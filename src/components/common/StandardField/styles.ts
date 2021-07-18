@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  box: ({ isDragging }) => ({
+  box: ({ isDragging }: { isDragging: boolean }) => ({
     marginTop: 20,
     background: "#FFFFFF",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "21px",
     alignItems: "center",
     color: "#333333",
-    paddingRight: 10
+    paddingRight: 10,
   },
   label: {
     background: "#FFDE8B",
@@ -35,18 +35,18 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 2,
     padding: 4,
     position: "absolute",
-    display: 'flex',
-    alignItems: 'center',
-    '&:hover': {
-      '& $deleteButton': {
-        visibility: 'initial'
-      }
-    }
+    display: "flex",
+    alignItems: "center",
+    "&:hover": {
+      "& $deleteButton": {
+        visibility: "initial",
+      },
+    },
   },
   deleteButton: {
     padding: 2,
-    visibility: 'hidden'
-  }
+    visibility: "hidden",
+  },
 }));
 
 export { useStyles };

@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { DocumentEditor, DocumentView } from "@flynotes/fly-document";
+import { DocumentEditor, DocumentView, FieldInputProps } from "@flynotes/fly-document";
 import FieldInput from '../common/FieldInput';
+import FieldView from '../common/FieldView';
+
 import { useStyles } from './styles';
 import { Box, FormControlLabel, Typography } from '@material-ui/core';
+import { FieldLabelProps, FieldTextProps } from '../../../../flynotes-docusign/dist/lib/components/anchors';
+import { ILabel } from '../../types/Item';
 
-const FieldText = ({ value, x, y }) => (
-  <div style={{ position: 'absolute', top: y, left: x, fontSize: 12, fontWeight: 600 }}>{value}</div>
-)
+interface IProps {
+  anchors: ILabel[];
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  file: Record<string, string>,
+  fileUrl: string;
+}
 
-export default function Preview({ anchors, open, setOpen, file, fileUrl }) {
+export default function Preview({ anchors, open, setOpen, file, fileUrl }: IProps): JSX.Element {
   const presetValues = {
     patientName: 'Chloe L Franklin',
     patientAddressLine1: '58',
@@ -22,10 +30,11 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }) {
     patientAddressPostCode: 'SA32 7TW',
     clinicianName: 'UK Clinical Research Collaboration',
     practiceName: '8th tooth'
-  }
+  } as Record<string,string>;
+  
   const presetAnchors = anchors.map((anchor) => ({
     ...anchor,
-    value: presetValues[anchor.name]
+    value: presetValues[anchor.name] || ''
   }));
 
   const [data, setData] = useState(presetAnchors);
@@ -58,7 +67,7 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }) {
     saveData().then(() => handleClose())
   }
 
-  const descriptionElementRef = React.useRef(null);
+  const descriptionElementRef = React.useRef<HTMLElement>(null);
   React.useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
@@ -112,7 +121,7 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }) {
                   previewPageWrapper: "previewPageWrapper",
                   previewFooter: "previewFooter",
                 }}
-                FieldInput={FieldInput}
+                FieldInput={FieldInput as React.FC<FieldInputProps>}
               />
             ) : (
               <DocumentView
@@ -126,7 +135,7 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }) {
                   previewPageWrapper: "previewPageWrapper",
                   previewFooter: "previewFooter",
                 }}
-                FieldText={FieldText}
+                FieldText={FieldView as React.FC<FieldTextProps>}
               />
             )
           }

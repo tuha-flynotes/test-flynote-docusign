@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#EFEFEF',
   },
   standardContainer: {
-    width: 200,
+    width: 220,
     backgroundColor: '#EFEFEF',
     margin: '30px 10px'
   },

@@ -9,7 +9,7 @@
   overflow-y: scroll;
   background-color: #efefef;
   overflow-x: hidden !important;
-  width: 820px;
+  width: 816px;
 }
 
 .pagesWrapper > :first-child {
@@ -47,5 +47,14 @@
 }
 
 .react-pdf__Page__annotations {
+  display: none;
+}
+
+.sigCanvas {
+  background: white;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
   display: none;
 }

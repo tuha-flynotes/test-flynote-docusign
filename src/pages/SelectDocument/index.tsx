@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { Box, CircularProgress, List, ListItem, ListItemText } from '@material-ui/core';
 import { useStyles } from './styles';
-export default function SelectDocument({ onSelect }) {
+
+interface IProps {
+  onSelect: (file: any) => void;
+  file: any;
+}
+export default function SelectDocument({ onSelect }: any): JSX.Element {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<any[]>([]);
   useEffect(() => {
     async function getData() {
       const response = await fetch('http://localhost:5000/file-document');

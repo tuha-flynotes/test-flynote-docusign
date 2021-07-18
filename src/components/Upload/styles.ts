@@ -4,10 +4,9 @@ const useStyles = makeStyles((theme) => ({
   dialogTitle: {
     fontFamily: 'Poppins',
     fontStyle: 'normal',
-    fontWeight: '500',
+    fontWeight: 500,
     fontSize: '16px',
     lineHeight: '24px',
-    /* identical to box height */
     textAlign: 'center',
     color: '#333333',
   },

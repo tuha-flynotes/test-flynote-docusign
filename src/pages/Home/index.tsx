@@ -1,15 +1,19 @@
 import { Box, Button } from '@material-ui/core';
-import React from 'react';
+import React, { FC } from 'react';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { useHistory } from 'react-router-dom';
 import UploadDialog from '../../components/Upload';
 import { useStyles } from './styles';
 
-function Home({ onSetFile }) {
+interface IProps {
+  onSetFile: (file: any) => void;
+}
+
+function Home({ onSetFile }: IProps) {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
-  const handleUploadFile = (file) => {
+  const handleUploadFile = (file: any) => {
     onSetFile?.(file);
     history.push('/edit');
   }

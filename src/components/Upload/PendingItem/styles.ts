@@ -11,12 +11,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative'
   },
   preview: {
-    backgroundColor: "#E9E9E9"
+    backgroundColor: "#E9E9E9",
+    opacity: 0.5
   },
   fileName: {
     fontFamily: 'Poppins',
     fontStyle: 'normal',
-    fontWeight: '500',
+    fontWeight: 500,
     fontSize: '10px',
     lineHeight: '15px',
     /* identical to box height */
