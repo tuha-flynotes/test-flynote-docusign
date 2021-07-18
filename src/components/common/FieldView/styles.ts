@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
     top: y,
     left: x,
     width: 130,
-    height: 86,
     fontFamily: "Poppins",
   })
 }));

@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #3F95E7",
     borderRadius: 4,
     fontSize: 12,
-    height: type === "signature" ? 86 : 22,
+    height: type === "signature" ? 93 : 22,
+    width: 133,
     fontFamily: "Poppins",
   }),
 }));

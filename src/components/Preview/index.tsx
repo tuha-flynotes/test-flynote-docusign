@@ -1,17 +1,17 @@
-import React, { FC, useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Switch from '@material-ui/core/Switch';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import { DocumentEditor, DocumentView, FieldInputProps } from "@flynotes/fly-document";
+import { Box, FormControlLabel, IconButton } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import Switch from '@material-ui/core/Switch';
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import React, { useState } from 'react';
+import { FieldTextProps } from '../../../../flynotes-docusign/dist/lib/components/anchors';
+import { ILabel } from '../../types/Item';
 import FieldInput from '../common/FieldInput';
 import FieldView from '../common/FieldView';
-
 import { useStyles } from './styles';
-import { Box, FormControlLabel, Typography } from '@material-ui/core';
-import { FieldLabelProps, FieldTextProps } from '../../../../flynotes-docusign/dist/lib/components/anchors';
-import { ILabel } from '../../types/Item';
+import UserSelect from './UserSelect';
+
 
 interface IProps {
   anchors: ILabel[];
@@ -30,8 +30,8 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }: IProp
     patientAddressPostCode: 'SA32 7TW',
     clinicianName: 'UK Clinical Research Collaboration',
     practiceName: '8th tooth'
-  } as Record<string,string>;
-  
+  } as Record<string, string>;
+
   const presetAnchors = anchors.map((anchor) => ({
     ...anchor,
     value: presetValues[anchor.name] || ''
@@ -85,26 +85,35 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }: IProp
     <div>
       <Dialog
         open={open}
+        fullScreen
         onClose={handleClose}
         scroll='paper'
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
         fullWidth
-        maxWidth="lg"
       >
         <Box className={classes.dialogTitle} id="scroll-dialog-title">
-          <Typography>Preview</Typography>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={enableEditing}
-                onChange={handleChange}
-                name="editingStatus"
-                color="primary"
-              />
-            }
-            label="Editable"
-          />
+          <Box display="flex">
+            <Box className={classes.dialogTitleText}>Viewing as</Box>
+            <UserSelect />
+          </Box>
+          <Box>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={enableEditing}
+                  onChange={handleChange}
+                  name="editingStatus"
+                  color="primary"
+                />
+              }
+              label="Editable"
+            />
+            <IconButton onClick={handleClose} className={classes.closeIcon}>
+              <CloseOutlinedIcon />
+            </IconButton>
+          </Box>
+
         </Box>
         <DialogContent dividers className={classes.DialogContent}>
           {
@@ -141,14 +150,14 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }: IProp
           }
 
         </DialogContent>
-        <DialogActions>
+        {/* <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           <Button onClick={onSave} color="primary">
             Save
           </Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
     </div>
   );

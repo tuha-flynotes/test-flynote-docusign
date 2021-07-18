@@ -1,9 +1,10 @@
 import { Box } from "@material-ui/core";
 import React, { ChangeEvent, FC } from "react";
-import { default as ReactSignatureCanvas, default as SignatureCanvas } from 'react-signature-canvas';
 import { IAnchor } from '../../../types/Anchor';
 import { IItem } from '../../../types/Item';
 import FieldLabel from "../FieldLabel";
+import { ISignature } from "../SignatureCreate";
+import FieldSignatureInput from "./FieldSignatureInput";
 import { useStyles } from './styles';
 
 interface FieldInputProps extends IAnchor, IItem {
@@ -13,20 +14,15 @@ interface FieldInputProps extends IAnchor, IItem {
 }
 
 const FieldInput: FC<FieldInputProps> = (props) => {
-  const sigPad = React.useRef<ReactSignatureCanvas>();
   const { value, x, y, id, onChange, type } = props;
   const classes = useStyles({ x, y, type });
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange({ id, value: event.target.value });
   };
 
-  const handleEndDrawSignature = (e: MouseEvent) => {
-    const trimmedDataURL = sigPad.current?.getTrimmedCanvas().toDataURL('image/png');
-    onChange?.({ id, value: trimmedDataURL || '' })
-  }
-
-  const callbackRef = (instance: ReactSignatureCanvas) => {
-    sigPad.current = instance;
+  const handleChangeSignature = (value: ISignature) => {
+    const valueString = JSON.stringify(value);
+    onChange({ id, value: valueString })
   }
 
   if (type === 'text') {
@@ -36,14 +32,8 @@ const FieldInput: FC<FieldInputProps> = (props) => {
   if (type === 'signature') {
     return (
       <Box className={classes.input}>
-        <SignatureCanvas
-          penColor='black'
-          canvasProps={{ width: 130, height: 86, className: 'sigCanvas' }}
-          onEnd={handleEndDrawSignature}
-          ref={callbackRef}
-        />
+        <FieldSignatureInput onChange={handleChangeSignature} value={JSON.parse(value || '{}')} />
       </Box>
-
     );
   }
 

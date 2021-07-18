@@ -22,7 +22,7 @@ const FieldView = (props: IProps): JSX.Element => {
     return (
       <img
         className={classes.signatureView}
-        src={value}
+        src={JSON.parse(value).signatureValue}
       />
     );
   }
