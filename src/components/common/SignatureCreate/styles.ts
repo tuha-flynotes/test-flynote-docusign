@@ -50,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
     ...commonText,
   },
   nameInput: {
-    marginRight: 23,
-    width: "calc(100% - 23px)",
+    // marginRight: 23,
+    // width: "calc(100% - 23px)",
   },
   initialInput: {
     width: "100%",

@@ -1,19 +1,19 @@
-import { useState, useEffect, FC } from "react";
+import { DocumentDesign } from "@flynotes/fly-document";
+import { Box, Breadcrumbs, Button, CircularProgress, Link, Typography } from "@material-ui/core";
+import Cancel from '@material-ui/icons/Close';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import SaveIcon from '@material-ui/icons/Save';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import axios from "axios";
+import { FC, useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DocumentDesign } from "@flynotes/fly-document";
-import StandardField from "../../components/common/StandardField";
-import { standardFields } from '../../constants/standard';
-import { Typography, Breadcrumbs, Link, Button, Box, CircularProgress } from "@material-ui/core";
-import { useStyles } from './styles';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import Cancel from '@material-ui/icons/Close';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import SaveIcon from '@material-ui/icons/Save';
-import Preview from "../../components/Preview";
-import FieldLabel from "../../components/common/FieldLabel";
 import { FieldLabelProps } from "../../../../flynotes-docusign/dist/lib/components/anchors";
+import FieldLabel from "../../components/common/FieldLabel";
+import StandardField from "../../components/common/StandardField";
+import Preview from "../../components/Preview";
+import { standardFields } from '../../constants/standard';
+import { useStyles } from './styles';
 
 const JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJhMTc0NGMxLWRiOTItNGM0Zi1iMDRiLTkxMjk5NjViMDI0ZSIsImlhdCI6MTYyNTgxMjI1OCwiZXhwIjoxNjMzNTg4MjU4fQ.P2N72xiJUnLCMSOQ-va1ql4V72htuhgT2cQBxRx78jc';
 

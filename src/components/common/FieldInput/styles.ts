@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme) => ({
     top: y,
     left: x,
     outline: "none",
-    border: "1px solid #3F95E7",
     borderRadius: 4,
     fontSize: 12,
     height: type === "signature" ? 93 : 22,

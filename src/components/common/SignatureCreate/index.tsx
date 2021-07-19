@@ -9,13 +9,13 @@ import { useStyles } from './styles';
 
 export interface ISignature {
   fullName: string;
-  initials: string;
+  // initials: string;
   signatureValue: string
 }
 
 interface ISignatureError {
   fullName: boolean;
-  initials: boolean;
+  // initials: boolean;
   signatureValue: boolean
 }
 
@@ -63,10 +63,10 @@ export default function SignatureInput({ open = false, setOpen, onCreateSignatur
   }
 
   const handleSign = () => {
-    if (!signature.fullName || !signature.initials || !signature.signatureValue) {
+    if (!signature.fullName || !signature.signatureValue) {
       setSignatureError({
         fullName: !signature.fullName,
-        initials: !signature.initials,
+        // initials: !signature.initials,
         signatureValue: !signature.signatureValue,
       });
       return;
@@ -95,7 +95,7 @@ export default function SignatureInput({ open = false, setOpen, onCreateSignatur
           <Typography className={classes.requireText}>* Required</Typography>
           <Box className={classes.infoContainer}>
             <Grid container>
-              <Grid xs={8} item>
+              <Grid xs={12} item>
                 <TextField
                   InputLabelProps={{
                     classes: {
@@ -113,7 +113,7 @@ export default function SignatureInput({ open = false, setOpen, onCreateSignatur
                   value={signature.fullName}
                 />
               </Grid>
-              <Grid xs={4} item>
+              {/* <Grid xs={4} item>
                 <TextField
                   fullWidth
                   onChange={handleChange('initials')}
@@ -125,7 +125,7 @@ export default function SignatureInput({ open = false, setOpen, onCreateSignatur
                   error={signatureError.initials}
                   value={signature.initials}
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
           <Divider className={classes.divider} />

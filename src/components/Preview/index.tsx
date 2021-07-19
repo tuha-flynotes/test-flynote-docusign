@@ -12,6 +12,7 @@ import FieldView from '../common/FieldView';
 import { useStyles } from './styles';
 import UserSelect from './UserSelect';
 
+import { users } from './mock_user';
 
 interface IProps {
   anchors: ILabel[];
@@ -36,11 +37,9 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }: IProp
     ...anchor,
     value: presetValues[anchor.name] || ''
   }));
-
   const [data, setData] = useState(presetAnchors);
+  const [userId, setUserId] = useState<string | number>(1);
   const [enableEditing, setEnableEditing] = useState(true);
-  console.log('dta', data);
-
   const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
@@ -95,7 +94,12 @@ export default function Preview({ anchors, open, setOpen, file, fileUrl }: IProp
         <Box className={classes.dialogTitle} id="scroll-dialog-title">
           <Box display="flex">
             <Box className={classes.dialogTitleText}>Viewing as</Box>
-            <UserSelect />
+            <UserSelect
+              userId={userId}
+              users={users}
+              onChangeUser={(value) => setUserId(value)}
+              onSearchUser={(value) => console.log(value)}
+            />
           </Box>
           <Box>
             <FormControlLabel
